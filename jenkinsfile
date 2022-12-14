@@ -1,17 +1,20 @@
 pipeline {
-    agent{label "nginx_tst1"}
-    stages{
-        stage("Checkout") {
-            steps {
-                git 'https://github.com/Bencev04/project.git'
-                echo "stage 1-Checkout"
-                sh "pwd"
-            }
-        }
-        stage("Copy Files to Nginx") {
-            steps {
-                sh "cp -r * /usr/share/nginx/html"
-            }
-        }
-    }
+	agent {label "nginx_tst1"}
+	stages {
+		stage("Checkout") {
+			steps{
+				echo "Stage 1- Checkout"
+				git 'https://github.com/Bencev04/project.git'
+				sh 'git checkout main'
+				sh 'git branch'
+				sh "pwd"
+				sh "ls"
+			}
+		}
+		stage("Copy Files to Nginx") {
+			steps {
+				sh "cp -r * /usr/share/nginx/html"
+			}
+		}
+	}
 }
